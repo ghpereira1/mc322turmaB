@@ -57,6 +57,6 @@ public class Cliente {
 	}
         
         public void validarCPF(){
-            System.out.println("");
+            System.out.println("opa");
         }
 }
