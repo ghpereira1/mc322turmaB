@@ -1,4 +1,5 @@
 package projeto;
+import java.util.Random;
 public class Sinistro {
 	private int id;
 	private String data;
@@ -35,4 +36,9 @@ public class Sinistro {
 		this.endereco = endereco;
 	}
 	
+        public static int gerarID() {
+            Random random = new Random();
+            int id = random.nextInt(100000) + 1;
+            return id;
+        }
 }

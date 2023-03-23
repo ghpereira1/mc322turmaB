@@ -56,7 +56,50 @@ public class Cliente {
 		this.endereco = endereco;
 	}
         
-        public void validarCPF(){
-            System.out.println("opa");
+        public static boolean validarCPF(String cpf) {
+            // Removendo todos os caracteres não inteiros
+            cpf = cpf.replaceAll("\\D", "");
+            // Verificando se o CPF possui 11 dígitos
+            if (cpf.length() != 11) {
+                return false;
+            }
+            // Verificando se todos os dígitos são iguais
+            boolean todosDigitosIguais = true;
+            for (int i = 1; i < 11; i++) {
+                if (cpf.charAt(i) != cpf.charAt(0)) {
+                    todosDigitosIguais = false;
+                    break;
+                }
+            }
+            if (todosDigitosIguais) {
+                return false;
+            }
+            // Calculando o primeiro dígito verificador
+            int soma = 0;
+            for (int i = 0; i < 9; i++) {
+                soma += (10 - i) * (cpf.charAt(i) - '0');
+            }
+            int digito1 = 11 - (soma % 11);
+            if (digito1 >= 10) {
+                digito1 = 0;
+            }
+            // Verificando o primeiro dígito verificador
+            if (digito1 != cpf.charAt(9) - '0') {
+                return false;
+            }
+            // Calculando o segundo dígito verificador
+            soma = 0;
+            for (int i = 0; i < 10; i++) {
+                soma += (11 - i) * (cpf.charAt(i) - '0');
+            }
+            int digito2 = 11 - (soma % 11);
+            if (digito2 >= 10) {
+                digito2 = 0;
+            }
+            // Verificando o segundo dígito verificador
+            if (digito2 != cpf.charAt(10) - '0') {
+                return false;
+            }
+            return true;
         }
 }
